@@ -78,7 +78,7 @@ fn main() {
         build.flag("-std=c++11");
         build.flag("-fno-rtti");
     }
-    //link_cpp(&mut build);
+    link_cpp(&mut build);
     build.warnings(false).compile("libcrocksdb.a");
 }
 
@@ -114,13 +114,13 @@ fn link_cpp(build: &mut Build) {
     // optional static linking
     if cfg!(feature = "static_libcpp") {
         println!("cargo:rustc-link-lib=static={}", &libname);
+        println!(
+            "cargo:rustc-link-search=native={}",
+            path.parent().unwrap().display()
+        );
     } else {
         println!("cargo:rustc-link-lib=dylib={}", &libname);
     }
-    println!(
-        "cargo:rustc-link-search=native={}",
-        path.parent().unwrap().display()
-    );
     build.cpp_link_stdlib(None);
 }
 
