@@ -120,6 +120,7 @@ fn link_cpp(build: &mut Build) {
         );
     } else {
         println!("cargo:rustc-link-lib=dylib={}", &libname);
+        println!("cargo:rustc-link-search=native=/usr/local/lib/");
     }
     build.cpp_link_stdlib(None);
 }
