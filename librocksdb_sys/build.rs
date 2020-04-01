@@ -83,13 +83,20 @@ fn main() {
 }
 
 fn link_cpp(build: &mut Build) {
+    println!("LINKING");
+    println!("LINKING");
+    println!("LINKING");
+    println!("LINKING");
+    println!("LINKING");
+    println!("LINKING");
+    println!("LINKING");
     let tool = build.get_compiler();
     let stdlib = if tool.is_like_gnu() {
         "libstdc++.a"
     } else if tool.is_like_clang() {
         "libc++.a"
     } else {
-        // Don't link to c++ statically on windows.
+        // Don't link to c++ statically on windows.72
         return;
     };
     let output = tool
@@ -100,6 +107,7 @@ fn link_cpp(build: &mut Build) {
         .unwrap();
     if !output.status.success() || output.stdout.is_empty() {
         // fallback to dynamically
+        println!("wat2");
         return;
     }
     let path = match str::from_utf8(&output.stdout) {
@@ -107,8 +115,17 @@ fn link_cpp(build: &mut Build) {
         Err(_) => return,
     };
     if !path.is_absolute() {
+        println!("wat3");
         return;
     }
+    println!("TEST");
+    println!("TEST");
+    println!("TEST");
+    println!("TEST");
+    println!("TEST");
+    println!("TEST");
+    println!("TEST");
+    println!("{:?}", path);
     // remove lib prefix and .a postfix.
     let libname = &stdlib[3..stdlib.len() - 2];
     // optional static linking
