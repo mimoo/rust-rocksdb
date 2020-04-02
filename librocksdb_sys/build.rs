@@ -83,6 +83,7 @@ fn main() {
 }
 
 fn link_cpp(build: &mut Build) {
+    /*
     let tool = build.get_compiler();
     let stdlib = if tool.is_like_gnu() {
         "libstdc++.a"
@@ -118,6 +119,7 @@ fn link_cpp(build: &mut Build) {
         "cargo:rustc-link-search=native={}",
         path.parent().unwrap().display()
     );
+    */
     build.cpp_link_stdlib(None);
 }
 
